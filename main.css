@@ -5,11 +5,77 @@ html, body {
   padding: 0;
 }
 
+html {
+  /*
+    Цвета в CSS
+      - transparent — отсутствие цвета
+      - название цвета — https://developer.mozilla.org/en-US/docs/Web/CSS/named-color
+      - HEX-код через решетку
+        - Три компоненты цвета: Red, Green, Blue
+        - Каждая компонента цвета имеет значение от 0 до 255
+          - R красный 0.255  0..FF
+          - G зеленый 0.255  0..FF
+          - B синий 0.255    0..FF
+        - Каждый цвет записывается в шестнадцатеричной системе счисления
+          - двоичная 0, 1 => 0, 1, 10, 11, 100, 101, 110, 111
+          - десятеричная система 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+          - шестнадцатеричная система (Hexadecimal) 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, 13, 14, 15 .. 1F, 20, 21, 22
+      - Запись в системе RGB
+      - Запись в системе RGBA(Alpha) 0..1
+      - HSL — Hue, Saturation, Lightness
+  */
+  background-color: #eee;
+}
+
 body {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  /*
+    смещение по x
+    смещение по y
+    размытие
+    цвет
+  */
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   margin: 20px;
   padding: 20px;
+}
+
+#btn {
+  border: solid 1px #ccc;
+  background: transparent;
+  font-family: sans-serif;
+  font-size: 130%;
+  padding: 0.5em;
+}
+
+#btn:active {
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+#adv {
+  background-image:
+    linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+    linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%),
+    url("./media/pumpkins-medium.jpg");
+
+    /*
+    - x
+    - y
+    - Можно использовать: 
+      - ключевые слова (два разных центра — по горизонтали — center, по вертикали — middle)
+      - проценты
+      - абсолютные значения
+   */
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  color: #fff;
+  height: 10em;
+  width: 100%;
+  padding: 30px;
+  margin-bottom: 20px;
 }
 
 .content-wrapper {
