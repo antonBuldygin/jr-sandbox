@@ -182,6 +182,55 @@ body {
   margin: 10px;
 }
 
+.watch {
+  border: solid 1px #ccc;
+  border-radius: 50%;
+  box-shadow: inset 5px 5px 2px rgba(0, 0, 0, 0.3);
+  height: 100px;
+  position: relative;
+  width: 100px;
+}
+
+.watch-hand {
+  background: orange;
+  position: absolute;
+  height: 45px;
+  left: 50%;
+  top: 5px;
+  width: 5px;
+
+  transform-origin: 0 100%;
+  transform: rotate(0);
+
+  animation: 
+    infinite-rotation 60s infinite steps(60),
+    pulse-color 2s infinite linear alternate;
+}
+
+.watch:hover .watch-hand {
+  animation-play-state: paused;
+}
+
+@keyframes infinite-rotation {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-color {
+  0% {
+    background-color: orange;
+  }
+  
+  100% {
+    background-color: red;
+  }
+}
+
 #adv {
   background-image:
     linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 70.71%),
@@ -205,6 +254,32 @@ body {
   width: 100%;
   padding: 30px;
   margin-bottom: 20px;
+
+  opacity: 0;
+
+  /*
+    Частота обновления
+      FPS — Frames per second — Кадров за секунду
+      24FPS
+      120FPS — 8.3ms кадр
+      60FPS — популярная частота обновления экрана
+        1 кадр длится примерно 16.6ms
+      30FPS — 33.2ms
+  */
+  animation: fadein 300ms;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
 }
 
 .content-wrapper {
@@ -248,9 +323,11 @@ body {
   padding: 10px;
   transform-origin: 50% 50%;
 
-  transition: transform 200ms ease-out 50ms;
+  /*
+    Debounce: "устранение коллизий".
+  */
+  transition: transform 200ms ease-out 200ms;
   transform: scale(1);
-
 
   /*
     - transition: width 200ms;
@@ -292,6 +369,6 @@ body {
   transform: skewX(10deg);
 }
 
-*/ .nav-item {
+.nav-item {
   font-style: italic;
 }
