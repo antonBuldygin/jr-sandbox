@@ -2,6 +2,10 @@
   --popup-z-index: 3;
   --layout-sticky-z-index: 2;
   --internal-sticky-z-index: 1;
+
+  --html-background: #eee;
+  --body-background: #fff;
+  --text-color: #000;
 }
 
 html,
@@ -11,7 +15,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 html {
   /*
@@ -47,6 +50,13 @@ body {
   border-radius: 20px;
   margin: 20px;
   padding: 20px;
+  max-width: 1400px;
+
+  /* Разрешение */
+  /* Количество точек на площадь */
+  /* 1024x768 */
+  /* 4 iPhone: Retina-экраны (в переводе — сетчатка) */
+  /* 300dpi — dots per inch */
 }
 
 #example-container {
@@ -371,4 +381,26 @@ body {
 
 .nav-item {
   font-style: italic;
+}
+
+@media (orientation: landscape) and (max-width: 940px), 
+       (0px <= width <= 420px) {
+  .content-wrapper {
+    flex-direction: column-reverse;
+    display: flex;
+  }
+
+  .content-sidebar {
+    flex-basis: auto;
+  }
+
+  .dialog {
+    bottom: 0;
+    right: 0;
+    top: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  
 }
