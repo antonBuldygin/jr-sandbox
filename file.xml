@@ -1,0 +1,26 @@
+<!-- eXtended Markup Language -->
+
+<!DOCTYPE xml>
+<xml>
+  <class>
+    <student name="" email="" photo=""></student>
+    <student name="" email="" photo="">
+      <exams>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+      </exams>
+    </student>
+    <student name="" email="" photo="">
+      <exams>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+        <exam mark="5" date="" link=""></exam>
+      </exams>
+    </student>
+    <student name="" email="" photo=""></student>
+    <student name="" email="" photo=""></student>
+  </class>
+</xml>
