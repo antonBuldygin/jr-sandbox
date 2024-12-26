@@ -1,11 +1,92 @@
+@import "./common.css";
+
+/*
+  Variables
+  Пере[мен]ные
+  Постоянные
+
+  [Pre][processor]
+*/
+
+:root {
+  --accent-color: #dd5656;
+  --size: 1px;
+  --border-style: solid;
+  --border-color: #000;
+
+  --font-size: 18px;
+
+  --layout-color: #EEE;
+  --background-color: #FFF;
+  --text-color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --layout-color: #000;
+    --background-color: #333;
+    --text-color: #CCC;
+    --border-color: #CCC;
+  }
+}
+
+html {
+  background-color: var(--layout-color);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--font-size);
+  /* calc — Calculate */
+}
+
+@media (max-width: 600px) {
+  :root {
+    --font-size: 16px;
+  }
+}
+
+.articles {
+  --variable: red;
+}
+
+.highlight {
+  color: var(--variable, orange);
+}
+
+a:link {
+  color: var(--accent-color);
+  text-decoration-color: var(--border-color);
+  margin-right: var(--accent-color);
+}
+
+a:visited {
+  color: var(--accent-color);
+}
+
 #my-button {
-  background: #fff;
-  border: solid 1px #ccc;
+  --border-color: red;
+
+  background: var(--background-color);
+  border: var(--border-style) 1px var(--border-color);
   border-radius: 2px;
-  color: #000;
-  font-size: 0;
+  color: var(--text-color);
   margin: 20px 0;
   padding: 5px 10px;
+
+  /* WEB */
+  /* w3c — WWWC — World Wide Web Consorcium */
+  /*
+    — Chromium — Edge, Chrome, ...
+    — Mozilla — Gecko
+    — Safari — WebKit
+  */
+}
+
+#my-button span {
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
 }
 
 #my-button::before {
@@ -25,17 +106,22 @@
 }
 
 input:checked {
-  outline: solid 1px red;
+  --padding: 30px;
+
+  outline: solid 1px var(--accent-color);
+  width: calc(100% - (var(--padding) * 2) * 3);
 }
 
 .layout {
+  --grid-gap: 20px;
+
   display: grid;
   grid-template-areas:
     "🧢 🧢 🧢"
     "🧠 🧠 🙄"
   ;
 
-  gap: 20px;
+  gap: var(--grid-gap);
 }
 
 .layout-header {
@@ -51,6 +137,8 @@ input:checked {
 }
 
 .video-container {
+  --columns: 1fr 1fr 1fr 1fr;
+
   /*
     Такая же особенность как у флекса
       - для всех остальных видов отображения свойство display влияет
@@ -61,7 +149,7 @@ input:checked {
   display: grid; /* Если задать grid, то сам контейнер будет вести себя как блок */
 
   /* Задается количество колонок и рядов и их размеры или пропорции */
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: var(--columns);
   grid-auto-rows: 200px;
   grid-auto-flow: dense;
 
@@ -69,12 +157,19 @@ input:checked {
   column-gap: 10px;
 }
 
+@media (max-width: 600px) {
+  .video-container {
+    --columns: 1fr 1fr;
+  }
+}
+
 .video-container article {
   border: solid 1px #ccc;
 }
 
 .video-container article:hover {
-  border-color: #fcc;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
 }
 
 .video-container article.special-video {
@@ -83,7 +178,7 @@ input:checked {
 }
 
 blockquote::first-letter {
-  color: blue;
+  color: var(--accent-color);
   float: left;
   font-size: 2em;
 }
@@ -107,13 +202,29 @@ blockquote::after {
 }
 
 .footer a:link {
-  color: #000;
+  color: var(--accent-color);
 }
 
 .footer a:visited {
-  color: #666;
+  color: var(--accent-color);
 }
 
 .footer a:hover {
   color: maroon;
+}
+
+.search {
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  font: 14px sans-serif;
+  padding: 5px 10px;
+}
+
+.send {
+  background: rgba(250, 128, 114, 0.1);
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  color: #fff;
+  font: 14px sans-serif;
+  padding: 5px 10px;
 }

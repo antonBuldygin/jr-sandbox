@@ -1,0 +1,23 @@
+.send {
+  background: salmon;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  color: white;
+  font: 14px sans-serif;
+  padding: 5px 10px;
+}
+
+.search {
+  background: transparent;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  color: currentColor;
+  font: 14px sans-serif;
+  padding: 5px 10px;
+}
+
+.asd {
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=output.css.map */
