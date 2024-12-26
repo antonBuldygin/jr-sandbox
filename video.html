@@ -10,12 +10,20 @@
   <link rel="stylesheet" href="./video.css" type="text/css" />
   <link rel="stylesheet" href="./output.css" type="text/css" />
   <title>Document</title>
+
+  <script src="./index.js"></script><!-- Synchronous -->
 </head>
 
 <!--
 
   ECMA Script (ES)
-  
+  Node.js
+
+  Любой язык программирования:
+    — синкаксис — правила написания программ на языке
+    — среда —
+      — Node.js — умеет работать с сетью и с файловой системой
+      — любой движок для браузера — умеет работать со страницей
 
 -->
 
@@ -30,11 +38,36 @@
 
   -->
 
-  <div class="articles">
-    <div class="highlight">asd</div>
+  <div>
+    <script>
+      let randomlyGeneratedColor = `rgba(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, 1)`;
+
+      document.writeln(`<div style="border: solid 1px ${randomlyGeneratedColor}; border-radius: 5px; padding: 10px; margin-bottom: 10px; color: ${randomlyGeneratedColor}">
+        Этот текст написан случайным цветом
+      </div>`);
+    </script>
   </div>
 
-  <div class="highlight">dsa</div>
+  <div class="articles">
+    <div class="highlight">
+      <script>
+        2 * (2 + 2);
+
+        console.log(2 * (2 + 2));
+
+        console.time("Document write timer");
+        document.writeln("Hello from JavaScript");
+        console.timeEnd("Document write timer");
+      </script>
+    </div>
+  </div>
+
+
+  <div class="highlight">
+    <script>
+      document.writeln("Hello from JavaScript 2");
+    </script>
+  </div>
 
   <input type="text" class="search">
   <button class="send">Отправить</button>
@@ -123,6 +156,10 @@
       <a href="">Фейсбук</a>
     </div>
   </footer>
-</body>
 
+  <script>
+    
+  </script>
+
+</body>
 </html>
