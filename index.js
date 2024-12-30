@@ -30,18 +30,18 @@
 const earthRadius = 6378;
 
 let positionOfCourier = Math.atan(2) * earthRadius;
-console.log(positionOfCourier);
+// console.log(positionOfCourier);
 
 
 
 let randomlyGeneratedNumber;
-console.log("Объявленная, но не определенная переменная", randomlyGeneratedNumber);
+// console.log("Объявленная, но не определенная переменная", randomlyGeneratedNumber);
 
 randomlyGeneratedNumber = 12;
-console.log("Объявленная и уже определенная переменная", randomlyGeneratedNumber);
+// console.log("Объявленная и уже определенная переменная", randomlyGeneratedNumber);
 
 randomlyGeneratedNumber = "Привет";
-console.log("Объявленная и еще раз определенная переменная", randomlyGeneratedNumber);
+// console.log("Объявленная и еще раз определенная переменная", randomlyGeneratedNumber);
 
 
 1234
@@ -52,19 +52,33 @@ console.log("Объявленная и еще раз определенная п
 -1; // К единице применен унарный оператор минуса
 
 
-console.log(`Результат сложения 10 и 3 равняется ${10 + 3}`);
+// console.log(`Результат сложения 10 и 3 равняется ${10 + 3}`);
 
 Math.ceil(0.1); // Ceiling
 Math.round(1.5); //
 Math.floor(1.9); // Floor
 
-console.log(Math.round(Math.random() * 255));
+// console.log(Math.round(Math.random() * 255));
 
 "Текстовая \" информация\n\t";
 'Текстовая информация\n\t';
 `Текстовая информация`; // Шаблонная строка
 
-console.log("Оператор сложения" + " " + "строк");
+// console.log("Оператор сложения" + " " + "строк");
+
+const someVar = true;
+const another = false;
+
+
+// >
+// <
+// >=
+// <=
+
+// ==
+// ===
+
+// Динамическая типизация
 
 true;
 false;

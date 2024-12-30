@@ -38,6 +38,66 @@
 
   -->
 
+  <div style="align-items: baseline; display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 20px;">
+    <script>
+      const achievementsCount = 3;
+
+      // Циклические алгоритмы
+      // while (цикл с предусловием)     | for
+      // do..while (цикл с постусловием)
+
+      // let achievementsRendered = 0;
+      // while (achievementsRendered < achievementsCount) {
+      //   document.writeln("<span>⭐️</span>");
+      //   achievementsRendered++;
+      // }
+
+      for (let achievementsRendered = 0; achievementsRendered < achievementsCount; achievementsRendered++) {
+        document.writeln("<span>⭐️</span>");
+      }
+
+      // do {
+      //   document.writeln("<span>⭐️</span>");
+      //   achievementsRendered++;
+      // } while (achievementsRendered < achievementsCount)
+
+      // Всем циклам нужны:
+      // 1. Начальные условия
+      // 2. Закон изменения
+      // 3. Условие выхода (или условие продолжения)
+    </script>
+
+    <a href="#">Мой профиль</a>
+  </div>
+
+  <div>
+    <script>
+      // const age = prompt("Введите ваш возраст");
+      // const residence = prompt("Введите страну проживания");
+
+      const personToCheck = {
+        age: age !== null ? parseInt(age) : 0,
+        residence: residence ?? "World",
+      };
+
+      console.log(personToCheck);
+
+      // Позитивная логика
+      // Негативная логика
+
+      const isDrinkingAge = (
+        // Междуранодная проверка
+        (personToCheck.residence !== "USA" && personToCheck.age >= 18) ||
+        // Региональная проверка в США
+        (personToCheck.residence === "USA" && personToCheck.age >= 21)
+      );
+
+      const message = isDrinkingAge ? "Алкоголь вредит вашему здоровью" : "Пожалуйста покиньте этот сайт";
+
+      document.writeln(`<div style='text-align: center; margin: 20px 0; font-weight: 100; text-transform: uppercase;'>${message}</div>`);
+    </script>
+  </div>
+
   <div>
     <script>
       let randomlyGeneratedColor = `rgba(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, 1)`;
@@ -53,7 +113,7 @@
       <script>
         2 * (2 + 2);
 
-        console.log(2 * (2 + 2));
+        // console.log(2 * (2 + 2));
 
         console.time("Document write timer");
         document.writeln("Hello from JavaScript");
@@ -150,6 +210,44 @@
     </div>
     <div>
       2024 год <a href="">JavaRush</a>
+      <script>
+        const region = "America";
+        // America | Europe | Asia | Oceania
+
+        switch (region) {
+          case "America":
+            document.write("+1 800 555-12-34");
+            break;
+
+          case "Europe":
+            document.write("+44 800 123-67-89");
+            break;
+
+          case "Asia":
+            document.write("+86 800 333-33-31");
+            break;
+
+          case "Oceania":
+            document.write("+61 800 888-77-66");
+            break;
+
+          default:
+            document.write("Привет");
+            break;
+        }
+
+        // if (region === "America") {
+        //   document.write("+1 800 555-12-34");
+        // } else if (region === "Europe") {
+        //   document.write("+44 800 123-67-89");
+        // } else if (region === "Asia") {
+        //   document.write("+86 800 333-33-31");
+        // } else if (region === "Oceania") {
+        //   document.write("+61 800 888-77-66");
+        // } else {
+        //   document.write("Привет");
+        // }
+      </script>
     </div>
     <div>
       <a href="">Инстаграм</a>
@@ -158,8 +256,9 @@
   </footer>
 
   <script>
-    
+
   </script>
 
 </body>
+
 </html>
