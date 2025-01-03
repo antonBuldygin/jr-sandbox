@@ -40,21 +40,60 @@
 
   <div style="align-items: baseline; display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 20px;">
     <script>
-      const achievementsCount = 3;
+      // const achievementsCount = 3;
+
+      const achievementNames = {
+        "⭐️": "Суперзвезда",
+        "💪": "Силач",
+        "😎": "Крутан",
+        "🧮": "Уман",
+      };
+
+      const achievements = ["⭐️", "💪", "😎"];
+      // document.writeln(`<span>Количество ачивок: ${achievements.length}</span>`);
+
+      // const question = prompt("2 + 3?");
+      // if (Number(question) === 5) {
+      achievements.push("🧮");
+      // }
+
+      // Низкоуровневое программирование
+      for (let i = 0; i < achievements.length; i++) {
+        document.writeln(`<span title="${achievementNames[achievements[i]]}">${achievements[i]}</span>`);
+      }
+
+      // Высокоуровревое программирование
+      // for (let achievement of achievements) {
+      //   document.writeln(`<span>${achievement}</span>`);
+      // }
+
+      // console.log(achievements);
+
+      // if (starAchievement) {
+      //   document.writeln(`<span>${starAchievement}</span>`);
+      // }
+
+      // if (muscleAchievement) {
+      //   document.writeln(`<span>${muscleAchievement}</span>`);
+      // }
+
+      // if (glassesAchievement) {
+      //   document.writeln(`<span>${glassesAchievement}</span>`);
+      // }
 
       // Циклические алгоритмы
       // while (цикл с предусловием)     | for
       // do..while (цикл с постусловием)
 
-      // let achievementsRendered = 0;
-      // while (achievementsRendered < achievementsCount) {
+      // let achievementsToRender = 3;
+      // while (achievementsToRender--) {
       //   document.writeln("<span>⭐️</span>");
-      //   achievementsRendered++;
+      //   console.log("Неотрисованных ачивок", achievementsToRender);
       // }
 
-      for (let achievementsRendered = 0; achievementsRendered < achievementsCount; achievementsRendered++) {
-        document.writeln("<span>⭐️</span>");
-      }
+      // for (let achievementsRendered = 0; achievementsRendered < achievementsCount; achievementsRendered++) {
+      //   document.writeln("<span>⭐️</span>");
+      // }
 
       // do {
       //   document.writeln("<span>⭐️</span>");
@@ -86,9 +125,7 @@
       // Негативная логика
 
       const isDrinkingAge = (
-        // Междуранодная проверка
         (personToCheck.residence !== "USA" && personToCheck.age >= 18) ||
-        // Региональная проверка в США
         (personToCheck.residence === "USA" && personToCheck.age >= 21)
       );
 

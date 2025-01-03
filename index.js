@@ -70,6 +70,9 @@ const someVar = true;
 const another = false;
 
 
+1 + 2;
+1 + "3";
+
 // >
 // <
 // >=
@@ -79,10 +82,21 @@ const another = false;
 // ===
 
 // Динамическая типизация
+// По ходу вычислений один тип данных может быть 
+// __автоматически__ преобразован в другой тип данных
 
-true;
-false;
+true; // Truthy
+false; // Falsy
 
 undefined;
 
 null;
+
+// if (!Number(prompt("Введите ваш возраст"))) { // string | null
+//   alert("Покиньте сайт");
+// }
+
+// Сложный — сложенный
+// Трудный
+
+
