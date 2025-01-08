@@ -100,3 +100,21 @@ null;
 // Трудный
 
 
+// Утечка памяти
+const getMultiplierFunction = function() {
+  const multiplier = 3;
+
+  return function(value = 1) {
+    return value * multiplier;
+  };
+}
+
+const multiplier = getMultiplierFunction();
+
+console.log(multiplier(0));
+console.log(multiplier(1));
+console.log(multiplier(2));
+console.log(multiplier(4));
+console.log(multiplier(6));
+console.log(multiplier(8));
+

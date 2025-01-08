@@ -38,9 +38,64 @@
 
   -->
 
+  <div>
+    Количество: <input type="text" id="number-of-items" value="1" /><br />
+    Стоимость: <input type="text" id="price" value="100" /><br /><br />
+    <b>Итоговая стоимость:</b> <input type="text" readonly id="total-price" />
+
+    <script>
+      const amountInput = document.querySelector("#number-of-items");
+      const priceInput = document.querySelector("#price");
+      const totalPriceInput = document.querySelector("#total-price");
+
+      amountInput.onchange = function() {
+        this;
+        amountInput;
+        const a = 1;
+        const b = 2;
+
+        setTotalPriceValue();
+      }
+
+      priceInput.onchange = function() {
+        setTotalPriceValue();
+      }
+
+      // Параметры — это параметры с которыми функция объявлена
+      // Аргументы — это параметры с которыми функция вызвана
+      // Количество параметров необязательно будет совпадать с количеством аргументов
+
+      // Чистые функции (функциональное программирование)
+      // функции которые работают только на основании данных полученных через параметры
+      // и не изменяют свое окружение
+      const setTotalPriceValue = function() {
+        // 1. Объект window, если это обычная функция
+        // 2. Объект, на котором произошло событие, если это обработчик
+        // 3. Если эта функция записана в объект, то this — ссылка на объект
+        this; // Контекст функции
+
+
+        const amount = !isNaN(parseFloat(amountInput.value)) ? parseFloat(amountInput.value) : 0;
+        const price = !isNaN(parseFloat(priceInput.value)) ? parseFloat(priceInput.value) : 0;
+        totalPriceInput.value = amount * price;
+      }
+
+      setTotalPriceValue();
+
+      const hotel = {
+        name: "Hotel de Ville",
+        stars: 3,
+        toString: function() {
+          return `${this.name}, ${new Array(this.stars).fill("⭐️").join("")}`;
+        }
+      };
+    </script>
+  </div>
+
   <div style="align-items: baseline; display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 20px;">
     <script>
-      // const achievementsCount = 3;
+      const achievementsCount = 3;
+      console.log("Количество ачивок: " + achievementsCount);
 
       const achievementNames = {
         "⭐️": "Суперзвезда",
@@ -252,9 +307,11 @@
         // America | Europe | Asia | Oceania
 
         switch (region) {
-          case "America":
-            document.write("+1 800 555-12-34");
+          case "America": {
+            const americanPrefix = "+1";
+            document.write(americanPrefix + " 800 555-12-34");
             break;
+          }
 
           case "Europe":
             document.write("+44 800 123-67-89");
@@ -272,6 +329,12 @@
             document.write("Привет");
             break;
         }
+
+        console.log(rand, rand2, a);
+
+        // if (true) {
+        //   const 
+        // }
 
         // if (region === "America") {
         //   document.write("+1 800 555-12-34");
