@@ -71,9 +71,9 @@
       const setTotalPriceValue = function() {
         // 1. Объект window, если это обычная функция
         // 2. Объект, на котором произошло событие, если это обработчик
-        // 3. Если эта функция записана в объект, то this — ссылка на объект
+        // 3. this — это ссылка на объект, на котором была вызвана функция
+        // 4. Если эта функция вызвана как конструктор, то this — это ссылка на создаваемый объект
         this; // Контекст функции
-
 
         const amount = !isNaN(parseFloat(amountInput.value)) ? parseFloat(amountInput.value) : 0;
         const price = !isNaN(parseFloat(priceInput.value)) ? parseFloat(priceInput.value) : 0;
@@ -83,8 +83,14 @@
       setTotalPriceValue();
 
       const hotel = {
-        name: "Hotel de Ville",
         stars: 3,
+        name: "Hotel de Ville",
+        location: {
+          lng: 0,
+          lat: 0,
+        },
+        address: "",
+        amenities: ["Parking", "Wi-Fi", "Swimming pool"],
         toString: function() {
           return `${this.name}, ${new Array(this.stars).fill("⭐️").join("")}`;
         }
