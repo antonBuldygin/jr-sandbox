@@ -44,11 +44,92 @@
     <b>Итоговая стоимость:</b> <input type="text" readonly id="total-price" />
 
     <script>
+      function Const(arg1, arg2) {
+        if (typeof arg1 === "number") {
+
+        } else if (typeof arg1 === "object" && !(arg1 instanceof Array)) {
+
+        } else if (arg1 instanceof Array) {
+
+        }
+      }
+
+      Const(1, 2);
+      Const({
+        one: 1,
+        two: 2,
+      });
+      Const([1, 2]);
+
+      // Исключение — механизм в JS, позволяющий сказать, что
+      // выполнение программы не может продолжаться дальше
+
+      // Исключение — это объект JS, который описывает наступившую
+      // внештатную ситуацию
+      // В момент наступления внештатной ситуации поток выполнения программы 
+      // останавливатеся
+
+      // Каждая ошибка содержит в себе информацию о цепочке вызовов, которые 
+      // привели к ошибке (call stack)
+
+      // Fail fast
+      // Паттерн программирования при котором ошибка или выход из функции
+      // производится как можно раньше
+
+      // Сообщения об ошибках должны быть максимально полными и ясными
+
+      // Для обработки исключений в JS существует конструкция
+      // try..catch..finally. Эта конструкция позволяет
+      // избежать возникновения необработанных исключений
+
+      // Остановка выполнения кода происходит только в случае
+      // возникновения необработанных блоком try..catch
+      // исключений. Если исключение было "поймано", прерывания
+      // выполнения кода не произойдет
+      try {
+        calculations(0, 100, 1230);
+      }
+      // Блок catch содержит фигурные скобки, в которых
+      // по аналогии с функциями описывается как получить
+      // доступ к объекту ошибки
+
+      // Блок catch не обрабатывает синтаксические ошибки. Он 
+      // обрабатывает только исключения брошенные или пользователями
+      // или встроенными в JS функциями
+
+      // Блок catch совсем не вызовется если блок try не бросит исключения
+      // поэтому даже если код в catch содержит ошибку, эта ошибка не будет
+      // брошена
+      catch (err) {
+        if (err instanceof RangeError) {
+          document.write(`<div>${err.message}</div>`);
+        }
+      }
+
+      // Исключения можно создавать самостоятельно
+      // Кроме создания, исключения можно вызывать
+      // с помощью ключевого слова throw
+
+      // function myFunction() {
+      //   asd;
+      // }
+
+      // function anotherFunction() {
+      //   myFunction();
+      // }
+
+      // anotherFunction();
+
+
+
+      // Хороший принцип — если произошла ошибка сообщать о ней как можно раньше, 
+      // на самом раннем этапе
+
       const amountInput = document.querySelector("#number-of-items");
       const priceInput = document.querySelector("#price");
       const totalPriceInput = document.querySelector("#total-price");
 
-      amountInput.onchange = function() {
+      amountInput.onchange = function () {
         this;
         amountInput;
         const a = 1;
@@ -57,7 +138,7 @@
         setTotalPriceValue();
       }
 
-      priceInput.onchange = function() {
+      priceInput.onchange = function () {
         setTotalPriceValue();
       }
 
@@ -68,7 +149,7 @@
       // Чистые функции (функциональное программирование)
       // функции которые работают только на основании данных полученных через параметры
       // и не изменяют свое окружение
-      const setTotalPriceValue = function() {
+      const setTotalPriceValue = function () {
         // 1. Объект window, если это обычная функция
         // 2. Объект, на котором произошло событие, если это обработчик
         // 3. this — это ссылка на объект, на котором была вызвана функция
@@ -91,7 +172,7 @@
         },
         address: "",
         amenities: ["Parking", "Wi-Fi", "Swimming pool"],
-        toString: function() {
+        toString: function () {
           return `${this.name}, ${new Array(this.stars).fill("⭐️").join("")}`;
         }
       };
@@ -101,7 +182,7 @@
   <div style="align-items: baseline; display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 20px;">
     <script>
       const achievementsCount = 3;
-      console.log("Количество ачивок: " + achievementsCount);
+      // console.log("Количество ачивок: " + achievementsCount);
 
       const achievementNames = {
         "⭐️": "Суперзвезда",
@@ -173,14 +254,16 @@
   <div>
     <script>
       // const age = prompt("Введите ваш возраст");
+      const age = 9;
       // const residence = prompt("Введите страну проживания");
+      const residence = "";
 
       const personToCheck = {
         age: age !== null ? parseInt(age) : 0,
         residence: residence ?? "World",
       };
 
-      console.log(personToCheck);
+      // console.log(personToCheck);
 
       // Позитивная логика
       // Негативная логика
@@ -213,9 +296,9 @@
 
         // console.log(2 * (2 + 2));
 
-        console.time("Document write timer");
+        // console.time("Document write timer");
         document.writeln("Hello from JavaScript");
-        console.timeEnd("Document write timer");
+        // console.timeEnd("Document write timer");
       </script>
     </div>
   </div>
@@ -336,10 +419,10 @@
             break;
         }
 
-        console.log(rand, rand2, a);
+        // console.log(rand, rand2, a);
 
         // if (true) {
-        //   const 
+        //   const
         // }
 
         // if (region === "America") {

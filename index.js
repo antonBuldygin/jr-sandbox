@@ -111,12 +111,12 @@ const getMultiplierFunction = function() {
 
 const multiplier = getMultiplierFunction();
 
-console.log(multiplier(0));
-console.log(multiplier(1));
-console.log(multiplier(2));
-console.log(multiplier(4));
-console.log(multiplier(6));
-console.log(multiplier(8));
+// console.log(multiplier(0));
+// console.log(multiplier(1));
+// console.log(multiplier(2));
+// console.log(multiplier(4));
+// console.log(multiplier(6));
+// console.log(multiplier(8));
 
 
 /*
@@ -218,14 +218,14 @@ function Hotel(stars, name, location, address, amenities) {
 // Вызов функции как конструктора осуществляется с помощью
 // слова new перед названием функции во время вызова
 const hotelAngara = new Hotel(3, "Ангара", {}, "Сквер Кирова", ["Wi-Fi", "Балетный класс"]);
-console.log("Вновь созданный объект отеля", hotelAngara);
-console.log(hotelAngara.toString());
-console.log(hotelAngara.toStringWithStars());
+// console.log("Вновь созданный объект отеля", hotelAngara);
+// console.log(hotelAngara.toString());
+// console.log(hotelAngara.toStringWithStars());
 
 const hotelInturist = new Hotel(4, "Интурист", {}, "Бульвар Гагарина", ["Wi-Fi", "Уроки рапиры"]);
-console.log("Еще один объект отеля", hotelInturist);
-console.log(hotelInturist.toString());
-console.log(hotelInturist.toStringWithStars());
+// console.log("Еще один объект отеля", hotelInturist);
+// console.log(hotelInturist.toString());
+// console.log(hotelInturist.toStringWithStars());
 
 function sayMyName(one, two, three) {
   return this.name;
@@ -237,9 +237,9 @@ function sayMyName(one, two, three) {
 hotelAngara.a = sayMyName;
 hotelInturist.b = sayMyName;
 
-console.log("SAY MY NAME");
-console.log(hotelAngara.a());
-console.log(hotelInturist.b());
+// console.log("SAY MY NAME");
+// console.log(hotelAngara.a());
+// console.log(hotelInturist.b());
 
 // bind — метод, который намертво привязывает контекст к функции
 // создавая новую функцию. Кроме привязки контекста, с помощью
@@ -252,16 +252,16 @@ const Peter = {
 // но с той разницей, что ее контекст будет всегда одним и тем же
 const sayPetersName = sayMyName.bind(Peter, 1, 2, 3);
 
-console.log("PETER'S NAME");
-console.log(sayPetersName());
+// console.log("PETER'S NAME");
+// console.log(sayPetersName());
 
 hotelAngara.c = sayPetersName;
-console.log(hotelAngara.c());
+// console.log(hotelAngara.c());
 
 // call, apply — методы, которые позволяют разово вызвать функцию
 // с заданным контекстом и параметрами
-console.log(sayMyName.call(Peter, 1, 2, 3)); // call принимает аргументы через запятую
-console.log(sayMyName.apply(Peter, [1, 2, 3])); // apply принимает аргументы через массив
+// console.log(sayMyName.call(Peter, 1, 2, 3)); // call принимает аргументы через запятую
+// console.log(sayMyName.apply(Peter, [1, 2, 3])); // apply принимает аргументы через массив
 
 // Мнемоника как отличить call от apply. По первой букве
 // call — c — comma — запятая
@@ -273,17 +273,29 @@ hotelAngara.name;
 hotelAngara["name"];
 hotelAngara["toString"]();
 
-console.log("OBJECT KEYS");
-for (let key in hotelAngara) {
-  console.log(key, hotelAngara[key]);
-}
+// console.log("OBJECT KEYS");
+// for (let key in hotelAngara) {
+//   console.log(key, hotelAngara[key]);
+// }
 
-console.log("name" in hotelAngara);
+// console.log("name" in hotelAngara);
 
 function getHotelAmenities({ amenities = [], name = "", stars = 0 }) {
   return amenities.join(", ");
 }
 
-console.log("AMENITIES");
-console.log(getHotelAmenities(hotelAngara));
-console.log(getHotelAmenities(hotelInturist));
+// console.log("AMENITIES");
+// console.log(getHotelAmenities(hotelAngara));
+// console.log(getHotelAmenities(hotelInturist));
+
+function calculations(min, max, value) {
+  if (typeof value !== "number" || typeof min !== "number" || typeof max !== "number") {
+    throw new TypeError("Переданные значения неправильного типа. Нужно передать числа (number)");
+  }
+
+  if (value < min || value > max) {
+    throw new RangeError(`Переданное значение ${value} не попадает в диапазон [${min}..${max}]`);
+  }
+
+  console.log(min);
+}
