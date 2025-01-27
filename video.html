@@ -364,6 +364,36 @@
         <a href="/video/6.html">Работа со шрифтом</a>
       </article>
 
+      <template>
+        <article tabindex="0">
+          <img src="" alt="Превью видео" />
+          <a href="/video/6.html">Работа со шрифтом</a>
+        </article>
+      </template>
+
+      <script>
+        const template = document.querySelector("template");
+        const article = template.content.querySelector("article");
+
+        const newArticle = article.cloneNode(true);
+
+
+        // const article = document.createElement("article");
+        // const img = document.createElement("img");
+        // const link = document.createElement("a");
+
+        // article.tabIndex = 0;
+        // img.src = "";
+        // img.alt = "";
+        // a.href = "/video/6.html";
+        // a.textContent = "Работа со шрифтом";
+
+        // article.appendChild(img);
+        // article.appendChild(a);
+
+        // document.querySelector(".video-container").appendChild(article);
+      </script>
+
       <article tabindex="0">
         <img src="" alt="Превью видео" />
         <a href="/video/7.html">Введение в JavaScript</a>

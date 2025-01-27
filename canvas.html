@@ -7,19 +7,35 @@
   <title>Document</title>
 </head>
 
+<!---->
+
 <body style="background: #333;">
 
-  <canvas
-    width="800"
-    height="400"
-    style="background: #fff; margin: 40px; width: 800px; height: 400px; border-radius: 10px; box-shadow: 0 0 20px greenyellow"
-  ></canvas>
+  <button>Закрыть</button>
 
   <script>
-    const CANVAS_WIDTH = 800;
+    const CANVAS_WIDTH = 1000;
     const CANVAS_HEIGHT = 400;
 
-    const canvas = document.querySelector("canvas");
+    const canvas = document.createElement("canvas");
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+    canvas.style.backgroundColor = "#fff";
+    canvas.style.margin = "40px";
+    canvas.style.width = `${CANVAS_WIDTH}px`;
+    canvas.style.height = `${CANVAS_HEIGHT}px`;
+    canvas.style.borderRadius = "10px";
+    canvas.style.boxShadow = "0 0 20px greenyellow";
+
+    document.body.prepend(canvas);
+
+    document.querySelector("button").onclick = function() {
+      //document.body.removeChild(canvas);
+      // canvas.parentElement.removeChild(canvas);
+      canvas.remove();
+    }
+
+    // const canvas = document.querySelector("canvas");
     const canvasContext = canvas.getContext("2d");
 
     // Интерфейс обекта — набор методов и свойств доступных для внешнего наблюдателя
@@ -88,7 +104,6 @@
       ctx.clearRect(this.x + 20, this.y + 20, this.width - 40, this.height - 40);
       ctx.strokeRect(this.x + 25, this.y + 25, this.width - 50, this.height - 50);
     };
-
 
     function WeirdTriangle(defaultColor) {
       this.color = defaultColor ?? "#000";
@@ -227,6 +242,138 @@
 
       },
     };
+
+
+    // Объекты в ООП используются как абстракции, которые
+    // описывают некую предметную область
+
+    // Основные абстракции JS в браузере
+    // — BOM (Browser Object Model)
+    // — DOM (Document Object Model)
+
+    // window — ключевой объект BOM
+    // window — глобальная область видимости в JS
+    // window — описывает текущую открытую вкладку и эта вкладка 
+    //          не имеет доступа к соседним вкладкам по причине
+    //          безопасности
+    // Внутри одного объекта window мы можем создавать вложенные окна
+
+    // navigator – объект, который дает возможность посмотреть
+    //             на возможности браузера пользователя, но не дает
+    //             возможности полноценно его определить
+
+    // location — объект, описывающий доступ к текущему адресу страницы
+
+    // history — объект, описывающий историю страниц
+
+    // screen — объект, описывающий параметры экрана пользователя
+
+    // DOM — Document Object Model
+    // document
+
+    // Деревья — структуры данных
+    // Данные — это структурированная под задачу информация
+    
+    // Примитивные данные 
+    // Сложные данные
+    // — списочные данные (массивы) — массивы, списки, стеки, очереди 
+    // — словарные данные (объекты)
+
+    // Существуют рекурсивные данные
+
+    // [ Редактор HTML   ] | [  Browser HTML  ]
+    // [ Редактор JS     ] | [                ]
+    // [ Редактор CSS    ] | [  Console       ]
+
+    // Дерево
+    // 1. Вложенная
+    // 2. Рекурсивная
+    // структура данных
+
+    // Правила построения дерева
+    // — только один родитель (корень)
+    // — все узлы (элементы, лежащие внутри дерева) тоже являются деревьями (идентичны друг другу)
+    // — у каждого элемента может быть сколько угодно потомков
+    // — у каждого элемента может быть только один родитель
+    // Особенности нейминга
+    // — элемент, у которого нет потомков называется лист
+
+    // Дерево — 
+    // — направленный
+    // — ациклический
+    // граф
+
+    function Panel(type, ...children) {
+      this.type = type ?? "default-panel";
+      this.children = children;
+    }
+
+    const CSS = {
+      type: "CSS", 
+      children: [],
+    };
+
+    const CorePanel = {
+      type: "horizontal-container",
+      children: [
+        {
+          type: "vertical-container",
+          children: [
+            {
+              type: "editor",
+              children: [
+                {
+                  type: "HTML",
+                  children: [],
+                  prevSibling: null,
+                  nextSibling: CSS,
+                },
+                CSS
+              ],
+            },
+            {
+              type: "editor",
+              children: [],
+            },
+            {
+              type: "editor",
+              children: [],
+            },
+          ],
+        }, {
+          type: "vertical-container",
+          children: [
+            {
+              type: "Browser",
+              children: [],
+            }, {
+              type: "Console",
+              children: [],
+            },
+          ],
+        },
+      ],
+    };
+
+
+    // DOM
+    // — JS не умеет работать с языком HTML
+    // — Для JS нужна другая модель отображения того, что находится на странице
+    //   но эта модель должна идеально отражать структуру этой страницы
+    // — Для каждого тега на странице заводится JS-объект
+    //   — Свойства этого объекта описывают его атрибуты
+    //   — Методы этого объекта дают доступ к управлению этим объектом
+    // — Для того, чтобы получить доступ и удобно хранить в памяти каждый
+    //   объект на странице, описывающий тег, они сложены в одно единственное
+    //   дерево
+    // — Корнем DOM-дерева является объект — document
+
+    // Навигация по вложенным элементам не очень удобна, поэтому существуют
+    // шорткаты
+    // — body
+    // — head
+
+
   </script>
 
 </body>
