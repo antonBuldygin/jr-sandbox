@@ -76,6 +76,28 @@
   </form>
 
   <script>
+    let lastDate = Date.now();
+
+    setInterval(function() {
+      const now = Date.now();
+      // console.log(now - lastDate);
+      lastDate = now;
+    }, 1000);
+
+    // stack [1, 2, 3, 4]
+    //    === EVENT LOOP ===
+    // queue [, , ]
+
+    // Паттерн Event Loop
+    // "Цикл событий"
+    // while (true) {
+    //   
+    // }
+
+
+    // Син[хрон]ный
+    // А-син[хрон]ный
+
     const link = document.querySelector("#link");
     link.onclick = function(evt) {
       console.log(evt);
