@@ -7,13 +7,83 @@
   <title>Document</title>
 </head>
 
-<!---->
+<!--
+  Canvas — переводится как "холст"
+  Canvas — инструмент для программной генерации векторной графики,
+          то есть создавать содержимое канваса можно только
+          с помощью JS
+  Canvas поддерживает несколько способов рисования: двумерная графика,
+  трехмерная графика и bitmap
+  Переключение между режимами рисования на канвасе осуществляется
+  выбором контекста рисования
+    - Контекст рисования это объект JS, методы и свойства которого дают
+      доступ к тому или иному способу создания графики
+  При рисовании на холсте канваса мы работаем со всем канвасом, то есть
+  у нас нет доступа к отдельным объектам холста
+-->
+
+
+<!--
+  JS позволяет делать страницы интерактивными
+  Event Loop
+  Асинхронные изменения страницы
+    - Воздействия пользователя
+      — На страницу
+        — Действия "мышкой"
+        — Действия клавиатурой
+        — Взаимодействие с формами
+    — Загрузка страницы или запросов (картинки, скрипты и т. д.)
+    — 
+
+  В момент асинхронного взаимодействия со страницей генерируется 
+  JS-объект который называется "Событие"
+
+  У каджого события есть "target" — объект, на котором событие произошло
+
+  Обработчик события — это функция на которую мы указываем JS
+  для того, чтобы она вызвалась когда на определенном таргете
+  произошло определенное событие
+
+  Как связать обработчик и объект события между собой. Это делается 
+  через таргет двумя способами
+    — задание коллбэка вида on(event-type)
+    — использование метода addEventListener
+  
+  Обработчик события с таргета можно убрать
+    — или переводом в null коллбэка on(event-type)
+    — вызовом метода removeEventListener
+
+  Всплывание событий: если нельзя однозначно определить где лучше всего
+  в иерархии DOM-дерева обрабатывать событие, то это событие произойдет
+  по всей цепочке вложенности
+    - всплывают не все события
+    - зато все события "погружаются" (или тонут, или захватываются)
+
+  У каждого объекта Eveте кроме свойств есть еще и два метода
+    — preventDefault()
+    — stopPropagation() — propagation — распространение
+-->
 
 <body style="background: #333;">
 
-  <button>Закрыть</button>
+  <a href="https://google.com" id="link" style="color: #FFF;">Уйти отсюда</a>
+
+  <form>
+    <div>
+      <input type="search" /><br /><br />
+      <button type="button">Закрыть</button>
+    </div>
+  </form>
 
   <script>
+    const link = document.querySelector("#link");
+    link.onclick = function(evt) {
+      console.log(evt);
+      if (confirm("Может останетесь?")) {
+        evt.preventDefault();
+      }
+    };
+
     const CANVAS_WIDTH = 1000;
     const CANVAS_HEIGHT = 400;
 
@@ -29,11 +99,42 @@
 
     document.body.prepend(canvas);
 
-    document.querySelector("button").onclick = function() {
-      //document.body.removeChild(canvas);
-      // canvas.parentElement.removeChild(canvas);
+    // document.querySelector("button").onclick = function(evt) {
+    //   console.log(evt);
+
+    //   //document.body.removeChild(canvas);
+    //   // canvas.parentElement.removeChild(canvas);
+    //   //canvas.remove();
+    // };
+
+
+    // Полезные практики
+    // 1. именовать обработчики событий особым образом
+    //   — on[EventType]
+    //   — [eventType]Handler
+    // 2. Не использовать обычные функции как обработчики события
+    const onDocumentKeyDown = function(evt) {
+      console.log(evt.key);
+      if (evt.key === "Escape") {
+        removeCanvas();
+      }
+    };
+
+    const removeCanvas = function() {
       canvas.remove();
-    }
+      document.body.removeEventListener("keydown", onDocumentKeyDown);
+    };
+
+    document.body.addEventListener("keydown", onDocumentKeyDown);
+
+    document.querySelector("button").addEventListener("click", function() {
+      removeCanvas();
+    });
+
+    document.querySelector("button").addEventListener("click", function() {
+      console.log("ANALYTICS EVENT LOGGED");
+    });
+
 
     // const canvas = document.querySelector("canvas");
     const canvasContext = canvas.getContext("2d");
@@ -69,14 +170,18 @@
     WeirdObject.prototype.y = 25;
     WeirdObject.prototype.width = 100;
     WeirdObject.prototype.height = 100;
+    WeirdObject.prototype.angle = 0;
 
     WeirdObject.prototype.render = function (ctx) {
-      ctx.font = "24px Helvetica";
-      ctx.fillText("Base Object", this.x, this.y);
+      ctx.save();
+      ctx.font = "36px Helvetica";
+      ctx.textBaseline = "hanging";
+      ctx.strokeText("Base Object", this.x, this.y);
+      ctx.restore();
     };
 
     WeirdObject.prototype.pivot = function (angle) {
-      // Домашка
+      this.angle = angle;
     }
 
     // Объект созданный функцией-конструктором
@@ -99,10 +204,20 @@
     // WeirdObject и у их потомков. Но за счет того, что мы переопределяем
     // ее, у потомков детали ее реализации отличаются от родительских
     WeirdRect.prototype.render = function (ctx) {
+      ctx.save();
+
+      const xCompensation = this.x + this.width / 2;
+      const yCompensation = this.y + this.width / 2;
+
+      ctx.translate(xCompensation, yCompensation); // translate to rectangle center
+      ctx.rotate(this.angle); // rotate
+      ctx.translate(-xCompensation, -yCompensation); // translate back
+
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
       ctx.clearRect(this.x + 20, this.y + 20, this.width - 40, this.height - 40);
       ctx.strokeRect(this.x + 25, this.y + 25, this.width - 50, this.height - 50);
+      ctx.restore();
     };
 
     function WeirdTriangle(defaultColor) {
@@ -112,12 +227,14 @@
     Object.setPrototypeOf(WeirdTriangle.prototype, WeirdObject.prototype);
 
     WeirdTriangle.prototype.render = function (ctx) {
+      ctx.save();
       ctx.fillStyle = this.color;
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.x + this.width, this.y + this.height);
       ctx.lineTo(this.x + this.width, this.y - this.height);
       ctx.fill();
+      ctx.restore();
     };
 
 
@@ -139,9 +256,11 @@
       #privateProp = 1;
 
       render(ctx) {
+        ctx.save();
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
         this.#privateProp;
+        ctx.restore();
       }
     }
 
@@ -166,7 +285,7 @@
         const { x, y } = getRandomCoord(CANVAS_WIDTH, CANVAS_HEIGHT, obj);
         obj.x = x;
         obj.y = y;
-        obj.pivot(/* get random angle */);
+        obj.pivot(Math.round((Math.random() * 356)) * Math.PI / 180);
       });
     }
 

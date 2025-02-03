@@ -176,6 +176,15 @@
     <div class="flex-item">18</div>
   </div>
 
+  <script>
+    const container = document.querySelector(".flex-example");
+    container.onclick = function(evt) {
+      if (evt.target.classList.contains("flex-item")) {
+        console.log("Click happened on a child element");
+      }
+    };
+  </script>
+
   <a href="#top">Наверх</a>
 
 </body>
