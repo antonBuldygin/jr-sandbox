@@ -517,5 +517,20 @@
 
   </script>
 
+  <script>
+    function* valueBasedGenerator() {
+      const value = yield "Give me a value";
+      yield value + 1;
+    }
+
+    const myGenerator = valueBasedGenerator();
+
+    const requestFromGenerator = myGenerator.next().value;
+    console.log(requestFromGenerator);
+
+    const responseToGenerator = myGenerator.next(10);
+    console.log(responseToGenerator.value);
+  </script>
+
 </body>
 </html>
