@@ -15,6 +15,317 @@
 </head>
 
 <!--
+  Передача данных по сети
+  — у любого ресурса в сети есть адрес (HTTP)
+  — этот адрес записан в DNS ⏱️
+  — запрос на сервер ⏱️
+    — хэндшейк ⏱️
+    — передача данных (занимают определенный объем) — запрос ⏱️
+    — работа сервера ⏱️
+    — передача данных на клиент (занимают определенный объем) — ответ ⏱️
+    — разбор ответа от сервера ⏱️
+
+  Виды запросов по задачам
+  — открытие страниц
+  — загрузка ресурсов (JS, CSS, картинки, аудио, видео)
+  — динамическая загрузка ресурсов
+    — чтение информации
+      — получение списка
+      — пагинация (переключение страниц или кнопка "показать еще")
+      — фильтрация и сортировка
+        — текстовый поиск
+
+    — редактирование информации
+      — регистрация и авторизация
+      — страница профиля пользователя
+        — пароль
+          — поменять пароль
+          — сбросить пароль
+        — логин (или электронная почта)
+          — поменять логин
+          — поменять электронную почту
+        — настройки
+          — отключить уведомления
+        — отправить инвайт в сервис (приглашение нового пользователя)
+
+  Виды запросов
+  — большая часть сетевых запросов делается по методу GET (т.н. "безопасный" метод)
+  —
+
+  Способы отправить запрос на сервер с клиента
+  — создать картинку, скрипт или стиль
+    — JSONP
+  — Объект XMLHttpRequest (XHR) — объект, в котором на результаты запроса можно реагировать с помощью событий
+  — Метод fetch
+  — Внешние библиотеки (используют внутри себя или fetch или XHR) — являются более удобной высокоуровневой обвязкой над системными способами отправить запрос
+-->
+
+
+
+<!--
+  Структуры данных JS
+    - Массив (список) — набор значений, где важен порядковый номер элемента
+      причем этот набор значений не уникальный
+      - очередь
+      - список
+      - стек
+    - Объект (словарь) — пара ключ-значение где ключ это строка, 
+      а значение — это любой тип данных. Кроме строк в JS в ключах
+      объекта может лежать Symbol
+      - деревья
+      - графы
+      - словари
+      - перечисления
+
+  Хранилища:
+  - cookies — общается с сервером, хранит текст, ограничено по размеру
+  - localStorage/sessionStorage
+  - indexedDb
+-->
+<script>
+  const lecturer = {
+    name: "Игорь",
+    age: 36,
+    wearsGlasses: true,
+  };
+
+
+  // Объект как перечисление
+  // Перечисление — это список констант
+  // в перечислении все типы значений одинаковые
+  const WarehouseType = {
+    FBO: "fbo", // торгуем на маркетплейсе и храним товары там же
+    FBS: "fbs", // торгуем на маркетплейсе, а храним товары у себя
+  };
+
+  const myWarehouseType = WarehouseType.FBO;
+
+  // Словарь
+  // Map (карта)
+  const WarehouseTypeName = {
+    [WarehouseType.FBO]: "наполняется маркетплейсом",
+    [WarehouseType.FBS]: "наполняется продавцом",
+  };
+
+  document.write(`Мой склад ${WarehouseTypeName[myWarehouseType]}`);
+
+  // Новые структуры данных
+  // — Map
+  // — Set
+
+  // Map — это набор пар ключ-значение, где ключ может быть любым типом данных
+  // Map можно создать на основе массива массивов
+  const myMap = new Map([
+    [WarehouseType.FBO, "наполняется маркетплейсом отсюда"],
+    [WarehouseType.FBS, "наполняется продавцом оттуда"],
+  ]);
+
+  for (const record of myMap) {
+    console.log(record);
+  }
+
+  // console.log(myMap.get(WarehouseType.FBS));
+
+  const Game = {};
+
+  // Любой объект в JS можно сделать итерируемым с помощью цикла for..of
+  // такой объект будет называться Iterable
+
+  let Levels = {
+    "ONE": {
+      difficulty: "1",
+      prev: null,
+      next: null,
+    },
+    "TWO": {
+      difficulty: "1",
+      prev: null,
+      next: null,
+    },
+    "THREE": {
+      difficulty: "1",
+      prev: null,
+      next: null,
+    },
+  }
+
+  // Object
+  // Array
+  // Map
+  // Set
+  // WeakMap
+  // WeakSet
+
+  const levelsMonsters = new WeakMap([
+    [Levels.ONE, new Set(["unicorn"])],
+    [Levels.TWO, new Set(["dragon", "unicorn"])],
+    [Levels.THREE, new Set(["dragon", "unicorn", "wizard", "dragon", "wizard"])],
+  ]);
+
+  let currentLevel = Levels.TWO;
+
+  levels = null;
+
+  function renderMonsters(...monsters) {
+    console.log(monsters);
+  }
+
+
+  // const favoriteHotels = new WeakSet();
+
+  // let hotels = null;
+  // hotels = await fetch('/hotels/?page=1');
+  // hotels.forEach((h) => {
+  //   if (h.isFavorite) {
+  //     favoriteHotels.add(h);
+  //   }
+  // });
+
+  // hotels = await fetch("/hotels/?page=2");  
+  // hotels.forEach((h) => {
+  //   if (h.isFavorite) {
+  //     favoriteHotels.add(h);
+  //   }
+  // });
+
+  renderMonsters(levelsMonsters.get(currentLevel));
+
+  currentLevel = null;
+
+  // Set — неиндесированная коллекция
+  // все значения в коллекции уникальны
+
+  const nonUniqueArray = ["dragon", "wizard", "wizard"];
+  const mySet = new Set(nonUniqueArray);
+
+  // console.log([...mySet]);
+
+  // Map === WeakMap (cлабый)
+  // Set === WeakSet
+</script>
+
+<script>
+  /**
+   * Cookies — механизм который позволяет одновременно решить две задачи
+   * 1. Дополнительный обмен информацией между сервером и клиентом
+   *  — при запросах на сервер, клиент отправляет все свои cookie этому
+   *    серверу
+   *    — если запрос делается из браузера cookies отправляются автоматически
+   *    — если запрос делается на другой сервер, или руками бывают ситуации
+   *      когда cookies нужно отправять самостоятельно
+   * 2. Долгосрочное хранилище информации на клиенте
+   *  — в cookies на клиенте можно сохранить информацию между перезагрузками 
+   *    страницы. Она будет доступна пока пользователь ее не удалит 
+   *    или cookie не "протухнет"
+   * 3. Cookies представляют собой хранилище вида ключ-значение. Хранятся на клиенте
+   *    и передаются на сервер в виде простой строки в заголовке запроса и ответа
+   * 
+   * 
+   * Авторизация
+   * клиент                                    сервер
+   *       первый запрос  ------------------->
+   *       <--------  ответ вместе с cookies
+   * [записывает cookies]
+   *       последующий запрос уже с cookies ->
+   *       <--------  ответ 
+   */
+
+  // Конструктор и обработчики событий
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://www.example.org/example.txt");
+
+  xhr.timeout = 10;
+
+  xhr.addEventListener("timeout", function() {
+
+  });
+
+  xhr.addEventListener("load", function (res) {
+
+  });
+
+  xhr.send();
+</script>
+
+<script>
+  // Промисы
+  const request = new Request("", {});
+  const requestPromise = fetch(request);
+
+  // По умолчанию fetch отправляет GET-запрос
+  const requestPromise2 = fetch("http://localhost:5001/videos");
+
+  const requestHeaders = new Headers();
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set("Authorization", "Basic u3hr9fuh39ufweufuew90fie90f");
+
+  const controller = new AbortController();
+  const { signal } = controller;
+
+  fetch("http://localhost:5001/videos", {
+    signal,
+    credentials: "include",
+    method: "POST",
+    headers: requestHeaders,
+    body: JSON.stringify({
+      title: "New video",
+      preview: "2.jpg",
+    }),
+  })
+    // Then сработает в случае успешного исхода запроса
+    // HTTP-запросы со статусами ошибок обрабатываются как успешные запросы
+    // т.е. если сервер ответил 404 или 500 ошибкой, она все равно попадет
+    // в then
+    .then((response) => {
+      if (response.status !== 201) {
+        throw new Error("Unable to create");
+      }
+
+      return response.json(); // Метод json тоже возвращает Promise
+    })
+    .then(function (data) {
+      console.log(data.id);
+    })
+    // Промис вернет ошибку в том случае если была ошибка сети или ошибка в коде
+    .catch(function (err) {
+      console.warn(err);
+    });
+
+  setTimeout(function() {
+    controller.abort();
+  }, 1000 * 30);
+
+
+  async function getDataFromRequest() {
+    try {
+      // Запрос на другой сервер сработает потому что сам сервер
+      // поддерживает CORS (Cross-Origin Resourse Sharing)
+      const response = await fetch("http://localhost:5001/videos", {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify({
+          title: "New video",
+          preview: "2.jpg",
+        }),
+      });
+
+      if (response.status !== 201) {
+        throw new Error();
+      }
+
+      const data = await response.json();
+      console.log(data.id);
+    }
+    catch (err) {
+      console.warn(err);
+    }
+  }
+
+  // При обработке ошибок сервера нужно учитывать таймауты
+
+</script>
+
+<!--
 
   ECMA Script (ES)
   Node.js
@@ -399,6 +710,8 @@
         <a href="/video/7.html">Введение в JavaScript</a>
       </article>
     </section>
+
+    <button>Показать еще</button>
 
     <aside class="external-links">
       <h3>Ссылки на наши каналы</h3>
