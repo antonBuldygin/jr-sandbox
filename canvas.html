@@ -78,7 +78,7 @@
   <script>
     let lastDate = Date.now();
 
-    setInterval(function() {
+    setInterval(function () {
       const now = Date.now();
       // console.log(now - lastDate);
       lastDate = now;
@@ -99,7 +99,7 @@
     // А-син[хрон]ный
 
     const link = document.querySelector("#link");
-    link.onclick = function(evt) {
+    link.onclick = function (evt) {
       console.log(evt);
       if (confirm("Может останетесь?")) {
         evt.preventDefault();
@@ -135,25 +135,25 @@
     //   — on[EventType]
     //   — [eventType]Handler
     // 2. Не использовать обычные функции как обработчики события
-    const onDocumentKeyDown = function(evt) {
+    const onDocumentKeyDown = function (evt) {
       console.log(evt.key);
       if (evt.key === "Escape") {
         removeCanvas();
       }
     };
 
-    const removeCanvas = function() {
+    const removeCanvas = function () {
       canvas.remove();
       document.body.removeEventListener("keydown", onDocumentKeyDown);
     };
 
     document.body.addEventListener("keydown", onDocumentKeyDown);
 
-    document.querySelector("button").addEventListener("click", function() {
+    document.querySelector("button").addEventListener("click", function () {
       removeCanvas();
     });
 
-    document.querySelector("button").addEventListener("click", function() {
+    document.querySelector("button").addEventListener("click", function () {
       console.log("ANALYTICS EVENT LOGGED");
     });
 
@@ -211,7 +211,7 @@
 
     // Манки-патчинг — это подход переопределения прототипов или цепочек прототипов 
     // "на лету", то есть во время выполнения программы
-    Array.prototype.wow = function() {
+    Array.prototype.wow = function () {
       console.log("wow");
     };
 
@@ -414,7 +414,7 @@
 
     // Деревья — структуры данных
     // Данные — это структурированная под задачу информация
-    
+
     // Примитивные данные 
     // Сложные данные
     // — списочные данные (массивы) — массивы, списки, стеки, очереди 
@@ -450,7 +450,7 @@
     }
 
     const CSS = {
-      type: "CSS", 
+      type: "CSS",
       children: [],
     };
 
@@ -518,6 +518,15 @@
   </script>
 
   <script>
+    // actions
+    //  - createpost.js
+    //  - readpost.js
+    // components
+    //  - button.js
+    // page
+    //  - index.js
+    // utils.js
+
     function* valueBasedGenerator() {
       const value = yield "Give me a value";
       yield value + 1;
@@ -532,5 +541,103 @@
     console.log(responseToGenerator.value);
   </script>
 
+
+
+  <div class="messages" style="max-height: 50vh; overflow: auto;">
+    <!--
+      1
+      2
+      3
+      4
+
+    
+    -->
+  </div>
+
+  <!--
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    —
+    9
+  -->
+
+  <script>
+    // ECMA
+    // Worker
+    // — 
+
+    let messages = [];
+
+    // 1. [x] Чат нужно постоянно обновлять
+    // long polling
+    // low latency
+    // setInterval(async function () {
+    //   const messagesResponse = await fetch(`/api/chat/messages`, {
+    //     method: "GET",
+    //     headers: {
+    //       "Authorization": "Bearer 9021390dnwdn09d8910128n089",
+    //     },
+    //   });
+
+    //   if ([400, 500].includes(messagesResponse.status)) {
+    //     messages.push("Ошибка сервера, перезагрузите страницу");
+    //   }
+
+    //   // 2. [x] Что нам возвращает API и как это отрисовывать на странице?
+    //   const messagesResponseData = await messagesResponse.json();
+    //   messages.push(messagesResponseData);
+
+    //   const container = document.querySelector(".messages");
+    //   container.innerHTML = ``;
+
+    //   for (const message of messages) {
+    //     const messageContainer = document.createElement("div");
+    //     messageContainer.innerHTML = `
+    //     <img src="${message.author.userpic}" title="${message.author.username}" />
+    //     <p>${message.body}</p>
+    //   `;
+    //   }
+    // }, 1000);
+
+
+
+    // Worker
+    // ServiceWorker
+    // SharedWorker
+
+    const worker = new Worker("parallel.js");
+    const messageForWorker = {
+      message: 'Привет',
+    };
+
+    worker.postMessage(messageForWorker);
+
+    worker.onmessage = (msg) => {
+      console.log(msg);
+    };
+
+    worker.onerror = () => {
+
+    };
+
+    // worker.terminate();
+
+
+    // const messagesWS = [];
+    // const ws = new WebSocket("wss://chat");
+
+    // ws.send(JSON.stringify({ message: 'answer the request' }));
+
+    // ws.onmessage = (message) => {
+    //   messagesWS.push(JSON.parse(message));
+    // }
+  </script>
+
 </body>
+
 </html>
