@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новости</title>
+  <link rel="stylesheet" type="text/css" href="./index.css" />
+</head>
+
+<body>
+
+  <main class="posts-container">
+    <h2>Блог</h2>
+
+    <section class="posts">
+    </section>
+  </main>
+
+  <template id="article-template">
+    <article class="post">
+      <h3 class="post-title"><a href="#"></a></h3>
+      <p class="post-date"></p>
+      <p class="post-preview"></p><!-- Отображается первое предложение из новости или первые 100 символов -->
+    </article>
+  </template>
+
+  <script>
+    {
+      const container = document.querySelector(".posts");
+      const template = document.querySelector("#article-template")
+        .content
+        .querySelector(".post");
+
+      //
+      // Бизнес-логика              Данные                       Отображение
+      // - алгоритмы и правила,     - информация, которая        - правила отри-
+      //   которые описывают          используется в бизнес-       совки данных
+      //   как клиент получает        логике                     ——————————————
+      //   ценность                                              - список
+      //                                                         - новость
+      //                                                         - агрегатор
+      //                                                         - RSS
+      //                                                         - мобильное
+      //                                                           приложение
+
+      function renderNews(news) {
+        if (news.length === 0) {
+          container.innerHTML = `<p style="color: #ccc">Новостей нет.</p>`;
+        }
+
+        const newsElements = news.map((n) => {
+          const newsElement = template.cloneNode(true);
+          const firstSentence = n.text.split(". ")[0];
+
+          newsElement.querySelector(".post-title a").textContent = n.title;
+          newsElement.querySelector(".post-title a").href = `news/${n.id}`;
+          newsElement.querySelector(".post-date").textContent = new Date(n.date).toLocaleDateString("ru-RU");
+          newsElement.querySelector(".post-preview").textContent = firstSentence.length > 100
+            ? `${firstSentence.substring(0, 100)}&hellip;`
+            : firstSentence;
+
+          return newsElement;
+        });
+
+        const fragmentContainer = document.createDocumentFragment();
+
+        newsElements.forEach((ne) => {
+          fragmentContainer.append(ne);
+        });
+
+        container.append(fragmentContainer);
+      }
+    }
+
+    const newsRequest = fetch(`http://localhost:3000/news`, {
+      method: "GET",
+    })
+      //              Второй способ распарсить JSON — воспользоваться
+      //              методом json() у объекта Response
+      .then((resp) => resp.json())
+      .then((data) => {
+        renderNews(data);
+      });
+  </script>
+
+</body>
+
+</html>

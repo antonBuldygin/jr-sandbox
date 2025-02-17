@@ -619,6 +619,7 @@
 
     worker.onmessage = (msg) => {
       console.log(msg);
+      worker.terminate();
     };
 
     worker.onerror = () => {
